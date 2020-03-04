@@ -1,10 +1,13 @@
-const http = require("http");
+const express = require("express");
+const app = express();
 
-const routes = require("./routes");
+app.use((req, res, next) => {
+  const something = req.rawHeaders;
+  res.send(something);
+  next();
+});
 
-const server = http.createServer(routes);
+const PORT = 5000;
 
-const PORT = 5000
-
-server.listen(PORT);
-console.log(`http://localhost:${PORT}`)
+app.listen(PORT);
+console.log(`http://localhost:${PORT}`);
