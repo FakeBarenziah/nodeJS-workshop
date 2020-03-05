@@ -64,7 +64,11 @@ app.use("/messages", (req, res, next) => {
       })
       .join("");
     res.send(
-      `<h1>Message Logs</h1><a href='/'>Home</a><br><a href='/send-message'>Send a Message</a><br><table style='width:90%'><tr><th>File</th><th>Time</th><th>Content</th>${dataTable}</table>`
+      `<h1>Message Logs</h1><a href='/'>Home</a><br><a href='/send-message'>Send a Message</a><br>${
+        dataTable.length
+          ? `<table style='width:90%'><tr><th>File</th><th>Time</th><th>Content</th>${dataTable}</table>`
+          : "<p>Message log is empty</p>"
+      }`
     );
   });
 });
