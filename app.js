@@ -28,7 +28,17 @@ app.use("/send-message", (req, res, next) => {
   );
 });
 
-app.use("/users", (req, res, next) => {
+app.post("/create-message", (req, res, next) => {
+  fs.writeFile(
+    `message_logs/${Date.now()}.txt`,
+    `${new Date()}: ${req.body.message}`,
+    err => {
+      if (err) throw Error(err);
+    }
+  );
+  res.redirect("/");
+});
+
   readMessageLogs().then(data => {
     console.log(data);
     res.json(data);
