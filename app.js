@@ -1,11 +1,14 @@
 const fs = require("fs");
 const { promisify } = require("util");
+const bodyParser = require("body-parser");
 
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
 const app = require("express")();
 
 const PORT = 5000;
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const readMessageLogs = async () => {
   const data = {};
