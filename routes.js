@@ -26,7 +26,7 @@ function requestHandler(req, res) {
     return req.on("end", () => {
       const parsedBody = Buffer.concat(body).toString();
       fs.writeFile(
-        `${Date.now()}.txt`,
+        `message_logs/${Date.now()}.txt`,
         `${new Date()}: ${parsedBody.split("=")[1]}`,
         err => {
           if (err) throw Error(err);
