@@ -13,10 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const readMessageLogs = async () => {
   const data = {};
 
-  const files = await readdir("message_logs");
+  const folders = await readdir("message_logs");
 
-  for (let i = 0; i < files.length; i++) {
-    data[files[i]] = await readFile(`message_logs/${files[i]}`, "utf8");
+  for (let j = 0; j < folders.length; j++) {
+    const files = await readdir(`message_logs/${folders[j]}`);
+    for (let i = 0; i < files.length; i++) {
+      data[files[i]] = await readFile(
+        `message_logs/${folders[j]}/${files[i]}`,
+        "utf8"
+      );
+    }
   }
 
   return data;
@@ -29,9 +35,17 @@ app.use("/send-message", (req, res, next) => {
 });
 
 app.post("/create-message", (req, res, next) => {
+  const thisDate = new Date();
+  const directory = `message_logs/${thisDate.getDate()}-${thisDate.getMonth() +
+    1}-${thisDate.getFullYear()}`;
+
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory);
+  }
+
   fs.writeFile(
-    `message_logs/${Date.now()}.txt`,
-    `${new Date()}: ${req.body.message}`,
+    `${directory}/${thisDate.valueOf()}.txt`,
+    `${thisDate}: ${req.body.message}`,
     err => {
       if (err) throw Error(err);
     }
