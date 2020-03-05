@@ -16,15 +16,16 @@ const readMessageLogs = async () => {
   const files = await readdir("message_logs");
 
   for (let i = 0; i < files.length; i++) {
-    const text = await readFile(`message_logs/${files[i]}`, "utf8");
-    data[files[i]] = text;
+    data[files[i]] = await readFile(`message_logs/${files[i]}`, "utf8");
   }
 
   return data;
 };
 
 app.use("/send-message", (req, res, next) => {
-  res.send("<h1>Send a Message Here</h1>");
+  res.send(
+    "<h1>Message Form</h1><a href='/'>Home</a><h4>Type a Message</h4><form action='/create-message' method='POST'><input type='text' name='message'><button type='submit'>Submit</button></form>"
+  );
 });
 
 app.use("/users", (req, res, next) => {
@@ -35,7 +36,9 @@ app.use("/users", (req, res, next) => {
 });
 
 app.use("/", (req, res, next) => {
-  res.send("<h1>Welcome</h1>");
+  res.send(
+    "<h1>Welcome</h1><a href='/messages'>View Messages</a><br><a href='/send-message'>Send a Message</a>"
+  );
 });
 
 app.listen(PORT);
