@@ -39,9 +39,19 @@ app.post("/create-message", (req, res, next) => {
   res.redirect("/");
 });
 
+app.use("/messages", (req, res, next) => {
   readMessageLogs().then(data => {
-    console.log(data);
-    res.json(data);
+    const dataTable = Object.keys(data)
+      .map(each => {
+        const time = data[each].match(/^.*:.*:.*:/).toString();
+        return `<tr><td>${each}</td><td>${time}</td><td>${data[each].slice(
+          time.length
+        )}</td></tr>`;
+      })
+      .join("");
+    res.send(
+      `<h1>Message Logs</h1><a href='/'>Home</a><br><a href='/send-message'>Send a Message</a><br><table style='width:90%'><tr><th>File</th><th>Time</th><th>Content</th>${dataTable}</table>`
+    );
   });
 });
 
