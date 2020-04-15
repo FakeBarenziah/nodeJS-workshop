@@ -5,6 +5,8 @@ const { promisify } = require("util");
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
 
+const path = require("path");
+
 const readMessageLogs = async () => {
   const data = {};
 
@@ -24,9 +26,7 @@ const readMessageLogs = async () => {
 };
 
 router.get("/send-message", (req, res, next) => {
-  res.send(
-    "<h1>Message Form</h1><a href='/'>Home</a><h4>Type a Message</h4><form action='/create-message' method='POST'><input type='text' name='message'><button type='submit'>Submit</button></form>"
-  );
+  res.sendFile(path.join(__dirname, "..", "views", "create-message.html"));
 });
 
 router.post("/create-message", (req, res, next) => {
@@ -69,9 +69,7 @@ router.get("/messages", (req, res, next) => {
 });
 
 router.get("/", (req, res, next) => {
-  res.send(
-    "<h1>Welcome</h1><a href='/messages'>View Messages</a><br><a href='/send-message'>Send a Message</a>"
-  );
+  res.sendFile(path.join(__dirname, "..", "views", "home.html"));
 });
 
 module.exports = router;

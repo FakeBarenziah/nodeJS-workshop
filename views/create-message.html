@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server Message Zone</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/messages">View Messages</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1>Message Creation Zone</h1>
+      <h4>Type a Message</h4>
+      <form action="/create-message" method="POST">
+        <input type="text" name="message" />
+        <button type="submit">
+          Submit
+        </button>
+      </form>
+    </main>
+  </body>
+</html>
