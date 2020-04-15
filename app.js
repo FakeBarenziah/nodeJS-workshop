@@ -9,12 +9,11 @@ const PORT = 5000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(adminRoutes);
 app.use(visitorsRoutes);
 
-app.get("/", (req, res, next) => {
-  res.send(
-    "<h1>Welcome</h1><a href='/messages'>View Messages</a><br><a href='/send-message'>Send a Message</a>"
-  );
+app.use((req, res, next) => {
+  res.status(404).send("This URL was not found.");
 });
 
 app.listen(PORT);

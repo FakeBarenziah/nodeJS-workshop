@@ -68,4 +68,10 @@ router.get("/messages", (req, res, next) => {
   });
 });
 
+router.get("/", (req, res, next) => {
+  res.send(
+    "<h1>Welcome</h1><a href='/messages'>View Messages</a><br><a href='/send-message'>Send a Message</a>"
+  );
+});
+
 module.exports = router;
