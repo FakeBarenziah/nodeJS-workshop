@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{docTitle}
+        link(rel="stylesheet", href="style/main.css")
+        link(rel="stylesheet", href="style/messageInput.css")
+    body
+        header.main-header
+            nav
+                ul.navbar
+                    li.navbar-item(href="/") Home
+                    li.navbar-item(href="/messages") View Messages
+                    li.navbar-item.active(href="/send-message") Send a Message
+        main
+            h1 Message Creation Zone
+            form(action="/create-message", method="POST")
+                .form-control
+                    label(for="message") Message
+                    input#message(type="text", name="message")
+                button(type="submit") Submit

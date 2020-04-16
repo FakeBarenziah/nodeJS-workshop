@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{docTitle}
+        link(rel="stylesheet", href="style/main.css")
+        link(rel="stylesheet", href="style/table.css")
+    body
+        header.main-header
+            nav
+                ul.navbar
+                    li.navbar-item
+                        a(href='/') Home
+                    li.navbar-item
+                        a(href='/messages') View Messages
+                    li.navbar-item
+                        a(href='send-message') Send a Message
+        h1 Message Logs
+        if messageList.length > 0
+            table
+                tr
+                    th File
+                    th Time
+                    th Message
+                each entry in messageList
+                    tr
+                        td #{entry.title}
+                        td #{entry.time}
+                        td #{entry.message}
+        else
+            p The log is currently empty

@@ -26,7 +26,7 @@ const readMessageLogs = async () => {
 };
 
 router.get("/send-message", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "views", "create-message.html"));
+  res.render("create-message", { docTitle: "Message Form" });
 });
 
 router.post("/create-message", (req, res, next) => {
@@ -50,26 +50,29 @@ router.post("/create-message", (req, res, next) => {
 
 router.get("/messages", (req, res, next) => {
   readMessageLogs().then(data => {
-    const dataTable = Object.keys(data)
+    const messageList = Object.keys(data)
       .map(each => {
         const time = data[each].match(/^.*:.*:.*:/).toString();
-        return `<tr><td>${each}</td><td>${time}</td><td>${data[each].slice(
-          time.length
-        )}</td></tr>`;
+        return {
+          title: each,
+          time: time,
+          message: data[each].slice(time.length)
+        };
       })
-      .join("");
-    res.send(
-      `<h1>Message Logs</h1><a href='/'>Home</a><br><a href='/send-message'>Send a Message</a><br>${
-        dataTable.length
-          ? `<table style='width:90%'><tr><th>File</th><th>Time</th><th>Content</th>${dataTable}</table>`
-          : "<p>Message log is empty</p>"
-      }`
-    );
+      .sort((a, b) => {
+        const first = Number(a.title.match(/^[0-9]+/));
+        const second = Number(b.title.match(/^[0-9]+/));
+        return first - second;
+      });
+    res.render("message-log", {
+      docTitle: "Message Log",
+      messageList: messageList
+    });
   });
 });
 
 router.get("/", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "..", "views", "home.html"));
+  res.render("home", { docTitle: "Message Hub" });
 });
 
 module.exports = router;
