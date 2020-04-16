@@ -45,7 +45,7 @@ router.post("/create-message", (req, res, next) => {
       if (err) throw Error(err);
     }
   );
-  res.redirect("/");
+  res.redirect("/messages");
 });
 
 router.get("/messages", (req, res, next) => {
