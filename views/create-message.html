@@ -4,21 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Server Message Zone</title>
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="style/messageInput.css" />
   </head>
   <body>
-    <header>
+    <header class="main-header">
       <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/messages">View Messages</a></li>
+        <ul class="navbar">
+          <li class="navbar-item"><a href="/">Home</a></li>
+          <li class="navbar-item"><a href="/messages">View Messages</a></li>
+          <li class="navbar-item">
+            <a href="/send-message">Send a Message</a>
+          </li>
         </ul>
       </nav>
     </header>
     <main>
       <h1>Message Creation Zone</h1>
-      <h4>Type a Message</h4>
       <form action="/create-message" method="POST">
-        <input type="text" name="message" />
+        <div class="form-control">
+          <label for="message">Message</label>
+          <input type="text" name="message" id="message" />
+        </div>
         <button type="submit">
           Submit
         </button>
