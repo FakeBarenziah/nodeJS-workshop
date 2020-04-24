@@ -10,9 +10,12 @@ html(lang="en")
         header.main-header
             nav
                 ul.navbar
-                    li.navbar-item(href="/") Home
-                    li.navbar-item(href="/messages") View Messages
-                    li.navbar-item.active(href="/send-message") Send a Message
+                    li.navbar-item
+                        a(href="/") Home
+                    li.navbar-item
+                        a(href="/messages") View Messages
+                    li.navbar-item
+                        a.active(href="/send-message") Send a Message
         main
             h1 Message Creation Zone
             form(action="/create-message", method="POST")

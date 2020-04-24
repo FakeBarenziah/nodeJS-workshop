@@ -32,7 +32,7 @@ nav {
   text-decoration: none;
 }
 .navbar-item a:hover,
-.navbar-item a:active,
+.navbar-item a.active,
 .navbar-item a:focus {
   color: #e8b68b;
 }
