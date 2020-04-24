@@ -20,7 +20,7 @@ app.use(adminRoutes);
 app.use(visitorsRoutes);
 
 app.use((req, res, next) => {
-  res.status(404).render("404");
+  res.status(404).render("404", { docTitle: "Page Not Found" });
 });
 
 app.listen(PORT);

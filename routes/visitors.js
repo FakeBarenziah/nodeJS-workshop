@@ -26,13 +26,17 @@ const readMessageLogs = async () => {
 };
 
 router.get("/send-message", (req, res, next) => {
-  res.render("create-message", { docTitle: "Message Form" });
+  res.render("create-message", {
+    docTitle: "Message Form",
+    path: "/send-message",
+  });
 });
 
 router.post("/create-message", (req, res, next) => {
   const thisDate = new Date();
-  const directory = `message_logs/${thisDate.getDate()}-${thisDate.getMonth() +
-    1}-${thisDate.getFullYear()}`;
+  const directory = `message_logs/${thisDate.getDate()}-${
+    thisDate.getMonth() + 1
+  }-${thisDate.getFullYear()}`;
 
   if (!fs.existsSync(directory)) {
     fs.mkdirSync(directory);
@@ -41,7 +45,7 @@ router.post("/create-message", (req, res, next) => {
   fs.writeFile(
     `${directory}/${thisDate.valueOf()}.txt`,
     `${thisDate}: ${req.body.message}`,
-    err => {
+    (err) => {
       if (err) throw Error(err);
     }
   );
@@ -49,14 +53,14 @@ router.post("/create-message", (req, res, next) => {
 });
 
 router.get("/messages", (req, res, next) => {
-  readMessageLogs().then(data => {
+  readMessageLogs().then((data) => {
     const messageList = Object.keys(data)
-      .map(each => {
+      .map((each) => {
         const time = data[each].match(/^.*:.*:.*:/).toString();
         return {
           title: each,
           time: time,
-          message: data[each].slice(time.length)
+          message: data[each].slice(time.length),
         };
       })
       .sort((a, b) => {
@@ -66,13 +70,14 @@ router.get("/messages", (req, res, next) => {
       });
     res.render("message-log", {
       docTitle: "Message Log",
-      messageList: messageList
+      messageList: messageList,
+      path: "/messages",
     });
   });
 });
 
 router.get("/", (req, res, next) => {
-  res.render("home", { docTitle: "Message Hub" });
+  res.render("home", { docTitle: "Message Hub", path: "/" });
 });
 
 module.exports = router;

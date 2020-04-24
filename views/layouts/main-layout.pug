@@ -3,7 +3,7 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Page Not Found
+        title #{docTitle}
         link(rel="stylesheet", href="style/main.css")
         block styles
     body
@@ -11,9 +11,9 @@ html(lang="en")
             nav
                 ul.navbar
                     li.navbar-item
-                        a(href="/") Home
+                        a(href="/", class=(path === '/' ? 'active' : '')) Home
                     li.navbar-item
-                        a(href="/messages") View Messages
+                        a(href="/messages", class=(path === '/messages' ? 'active' : '')) View Messages
                     li.navbar-item
-                        a(href="/send-message") Send a Message
+                        a(href="/send-message", class=(path === '/send-message' ? 'active' : '')) Send a Message
         block content
