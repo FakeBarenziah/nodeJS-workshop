@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{docTitle}
-        link(rel="stylesheet", href="style/main.css")
-    body
-        header.main-header
-            nav
-                ul.navbar
-                    li.navbar-item
-                        a.active(href='/') Home
-                    li.navbar-item
-                        a(href='/messages') View Messages
-                    li.navbar-item
-                        a(href='send-message') Send a Message
+extends layouts/main-layout.pug
+
+block content
+    main
         h1 Server Message Zone
         p This portal allows you to send and view messages left on the server

@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Page Not Found
-        link(rel="stylesheet", href="style/main.css")
-    body
-        header.main-header
-            nav
-                ul.navbar
-                    li.navbar-item
-                        a(href="/") Home
-                    li.navbar-item
-                        a(href="/messages") View Messages
-                    li.navbar-item
-                        a(href="/send-message") Send a Message
-        h1 The page you requested was not found
+extends layouts/main-layout.pug
+
+block content
+    h1 The page you requested was not found

@@ -1,21 +1,10 @@
-<!DOCTYPE html>
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title #{docTitle}
-        link(rel="stylesheet", href="style/main.css")
-        link(rel="stylesheet", href="style/table.css")
-    body
-        header.main-header
-            nav
-                ul.navbar
-                    li.navbar-item
-                        a(href='/') Home
-                    li.navbar-item
-                        a.active(href='/messages') View Messages
-                    li.navbar-item
-                        a(href='send-message') Send a Message
+extends layouts/main-layout.pug
+
+block styles
+    link(rel="stylesheet", href="style/table.css")
+
+block content
+    main
         h1 Message Logs
         if messageList.length > 0
             table
