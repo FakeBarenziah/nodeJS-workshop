@@ -72,6 +72,7 @@ router.get("/messages", (req, res, next) => {
       docTitle: "Message Log",
       messageList: messageList,
       path: "/messages",
+      messagesHere: messageList.length > 0,
     });
   });
 });

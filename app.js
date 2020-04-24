@@ -3,8 +3,12 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
-app.set("view engine", "pug");
-app.set("views", "views");
+const expressHbs = require("express-handlebars");
+
+app.engine("hbs", expressHbs());
+// app.set("view engine", "pug");
+app.set("view engine", "hbs");
+app.set("views", "views/hbs");
 
 const path = require("path");
 
