@@ -1,47 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ pageTitle }}</title>
-    <link rel="stylesheet" href="style/main.css" />
-    <link rel="stylesheet" href="style/table.css" />
+<main>
+    <h1>Message Logs</h1>
+    {{#if messagesHere }}
+    <table>
+        <tr>
+            <th>File</th>
+            <th>Time</th>
+            <th>Message</th>
+        </tr>
+        {{#each messageList}}
+        <tr>
+            <td>{{this.title}}</td>
+            <td>{{this.time}}</td>
+            <td>{{this.message}}</td>
 
-  </head>
-  <body>
-    <header class="main-header">
-      <nav>
-        <ul class="navbar">
-          <li class="navbar-item"><a href="/">Home</a></li>
-          <li class="navbar-item"><a href="/messages">View Messages</a></li>
-          <li class="navbar-item">
-            <a href="/send-message">Send a Message</a>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <main>
-        <h1>Message Logs</h1>
-        {{#if messagesHere }}
-        <table>
-            <tr>
-                <th>File</th>
-                <th>Time</th>
-                <th>Message</th>
-            </tr>
-            {{#each messageList}}
-            <tr>
-                <td>{{this.title}}</td>
-                <td>{{this.time}}</td>
-                <td>{{this.message}}</td>
+        </tr>
+        {{/each}}
+    </table>
 
-            </tr>
-            {{/each}}
-        </table>
-
-        {{ else }}
-            <p>The log is currently empty</p>
-        {{/if}}
-    </main>
-  </body>
-</html>
+    {{ else }}
+        <p>The log is currently empty</p>
+    {{/if}}
+</main>

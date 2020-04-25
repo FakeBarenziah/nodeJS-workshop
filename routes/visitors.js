@@ -29,6 +29,8 @@ router.get("/send-message", (req, res, next) => {
   res.render("create-message", {
     docTitle: "Message Form",
     path: "/send-message",
+    formStyle: true,
+    activeForm: true,
   });
 });
 
@@ -73,12 +75,14 @@ router.get("/messages", (req, res, next) => {
       messageList: messageList,
       path: "/messages",
       messagesHere: messageList.length > 0,
+      tableStyle: true,
+      activeLog: true,
     });
   });
 });
 
 router.get("/", (req, res, next) => {
-  res.render("home", { docTitle: "Message Hub", path: "/" });
+  res.render("home", { docTitle: "Message Hub", path: "/", activeHome: true });
 });
 
 module.exports = router;
