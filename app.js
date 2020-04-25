@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
-const noMatch = require("./controllers/404.js");
+const errorController = require("./controllers/error.js");
 
 app.set("view engine", "ejs");
 app.set("views", "views");
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin", adminRoutes);
 app.use(visitorsRoutes);
 
-app.use(noMatch);
+app.use(errorController.get404);
 
 app.listen(PORT);
 console.log(`http://localhost:${PORT}`);
