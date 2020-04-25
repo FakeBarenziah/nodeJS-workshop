@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const app = express();
 
+const noMatch = require("./controllers/404.js");
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -16,12 +18,10 @@ const PORT = 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(adminRoutes);
+app.use("/admin", adminRoutes);
 app.use(visitorsRoutes);
 
-app.use((req, res, next) => {
-  res.status(404).render("404", { docTitle: "Page Not Found" });
-});
+app.use(noMatch);
 
 app.listen(PORT);
 console.log(`http://localhost:${PORT}`);
