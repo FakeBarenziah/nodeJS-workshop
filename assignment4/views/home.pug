@@ -1,0 +1,13 @@
+extends layouts/main-layout.pug
+
+block styles
+    link(rel='stylesheet', href='form.css')
+
+block content
+    main
+        h1 Enter your name here
+        form(action='/create-user', method='POST')
+            .form-control
+                label(for='name') Name
+                input#name(type='text', name='name')
+            button(type='submit') Submit
