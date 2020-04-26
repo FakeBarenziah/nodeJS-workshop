@@ -4,6 +4,7 @@ table {
   color: #230f23;
   border-collapse: collapse;
   margin: auto;
+  margin-bottom: 1rem;
 }
 
 table,
