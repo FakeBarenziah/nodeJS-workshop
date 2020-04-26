@@ -2,19 +2,30 @@ const fs = require("fs");
 const { promisify } = require("util");
 const readdir = promisify(fs.readdir);
 const readFile = promisify(fs.readFile);
+const rmdir = promisify(fs.rmdir);
 
-const readMessageLogs = async () => {
+const readMessageLogs = async (filename) => {
   const data = {};
 
   const folders = await readdir("message_logs");
 
   for (let j = 0; j < folders.length; j++) {
-    const files = await readdir(`message_logs/${folders[j]}`);
+    const path = `message_logs/${folders[j]}`;
+    const files = await readdir(path);
     for (let i = 0; i < files.length; i++) {
-      data[files[i]] = await readFile(
-        `message_logs/${folders[j]}/${files[i]}`,
-        "utf8"
-      );
+      if (files[i] === filename) {
+        try {
+          fs.unlinkSync(path + `/${files[i]}`);
+        } catch (err) {
+          throw Error(err);
+        }
+        return;
+      } else {
+        data[files[i]] = await readFile(path + `/${files[i]}`, "utf8");
+      }
+    }
+    if (files.length === 0) {
+      await rmdir(path);
     }
   }
 
@@ -52,7 +63,7 @@ module.exports = class Message {
         const time = data[each].match(/^.*:.*:.*:/).toString();
         return {
           title: each,
-          time: time.slice(0, time.length - 1),
+          time: time.slice(0, time.length - 34),
           message: data[each].slice(time.length),
         };
       })
@@ -62,5 +73,9 @@ module.exports = class Message {
         return first - second;
       });
     return messageList;
+  }
+
+  static async removeFile(filename) {
+    await readMessageLogs(filename);
   }
 };

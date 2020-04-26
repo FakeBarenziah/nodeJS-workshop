@@ -6,9 +6,13 @@ exports.getMessages = async (req, res, next) => {
     docTitle: "Message Log",
     messageList: messageList,
     path: "/messages",
-    messagesHere: messageList.length > 0,
     tableStyle: true,
     activeLog: true,
+    clickHandler: function (filename) {
+      return function (event) {
+        alert(filename);
+      };
+    },
   });
 };
 

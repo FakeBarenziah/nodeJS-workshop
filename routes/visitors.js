@@ -1,7 +1,5 @@
 const router = require("express").Router();
 
-const fs = require("fs");
-
 const visitorsControl = require("../controllers/visitors.js");
 
 router.get("/create-message", visitorsControl.getCreateMessage);

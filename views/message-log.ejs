@@ -9,12 +9,14 @@
       <table>
         <tr>
           <th>File</th>
+          <th>Remove</th>
           <th>Time</th>
           <th>Message</th>
         </tr>
         <% messageList.forEach(each => { %>
         <tr>
           <td><%= each.title %></td>
+          <td><button onclick=<%= clickHandler(each.title) %>>X</button></td>
           <td><%= each.time %></td>
           <td><%= each.message %></td>
         </tr>
