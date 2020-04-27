@@ -8,13 +8,11 @@
       <% if(messageList.length>0){ %>
       <table>
         <tr>
-          <th>File</th>
           <th>Time</th>
           <th>Message</th>
         </tr>
         <% messageList.forEach(each => { %>
         <tr>
-          <td><%= each.title %></td>
           <td><%= each.time %></td>
           <td><%= each.message %></td>
         </tr>

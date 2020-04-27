@@ -1,14 +1,15 @@
 const Message = require("../models/message");
 
-exports.getMessages = async (req, res, next) => {
-  const messageList = await Message.fetchAll();
-  res.render("message-log", {
-    docTitle: "Message Log",
-    messageList: messageList,
-    path: "/messages",
-    messagesHere: messageList.length > 0,
-    tableStyle: true,
-    activeLog: true,
+exports.getMessages = (req, res, next) => {
+  Message.fetchAll((messageList) => {
+    res.render("message-log", {
+      docTitle: "Message Log",
+      messageList: messageList,
+      path: "/messages",
+      messagesHere: messageList.length > 0,
+      tableStyle: true,
+      activeLog: true,
+    });
   });
 };
 
