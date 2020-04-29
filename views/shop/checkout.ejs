@@ -4,5 +4,8 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
     <h1>Welcome to the Checkout</h1>
+    <form action='/orders' method="GET">
+        <button class="btn" type="submit">Orders</button>
+    </form>
 
 <%- include('../includes/end.ejs') %>
