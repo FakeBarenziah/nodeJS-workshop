@@ -1,14 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 
-const p = path.join(
+const directory = path.join(
   path.dirname(process.mainModule.filename),
   "data",
   "products.json"
 );
 
 const getProductsFromFile = (cb) => {
-  fs.readFile(p, (err, fileContent) => {
+  fs.readFile(directory, (err, fileContent) => {
     if (err) {
       cb([]);
     } else {
@@ -29,7 +29,7 @@ module.exports = class Product {
     this.id = Math.random().toString();
     getProductsFromFile((products) => {
       products.push(this);
-      fs.writeFile(p, JSON.stringify(products), (err) => {
+      fs.writeFile(directory, JSON.stringify(products), (err) => {
         console.log(err);
       });
     });
