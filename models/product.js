@@ -26,8 +26,15 @@ module.exports = class Product {
   }
 
   save() {
-    this.id = Math.random().toString();
+    const setOfIds = new Set();
+    let newId = Math.floor(Math.random() * 100000).toString();
     getProductsFromFile((products) => {
+      products.forEach((each) => setOfIds.add(each.id));
+      while (setOfIds.has(newId)) {
+        newId = Math.floor(Math.random() * 100000).toString();
+      }
+      this.id = newId;
+
       products.push(this);
       fs.writeFile(directory, JSON.stringify(products), (err) => {
         console.log(err);
